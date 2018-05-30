@@ -120,13 +120,21 @@ class MotionPlanning(Drone):
         self.target_position[2] = TARGET_ALTITUDE
 
         # TODO: read lat0, lon0 from colliders into floating point values
-        
-        # TODO: set home position to (lon0, lat0, 0)
+        fp = open("colliders.csv", "r")
+        lat_str, lon_str = fp.readline().split(',')
+        lat0 =  float(lat_str[5:])
+        lon0 =  float(lon_str[5:])
+        fp.close();
 
+        # TODO: set home position to (lon0, lat0, 0)
+        global_home = [lon0, lat0, 0]
+        self.set_home_position(lon0, lat0, 0)
         # TODO: retrieve current global position
- 
+        global_position = self.global_position
+        global_home = self.global_home
         # TODO: convert to current local position using global_to_local()
-        
+        local_position = global_to_local(global_position, self.global_home)
+
         print('global home {0}, position {1}, local position {2}'.format(self.global_home, self.global_position,
                                                                          self.local_position))
         # Read in obstacle map
@@ -138,13 +146,15 @@ class MotionPlanning(Drone):
         # Define starting point on the grid (this is just grid center)
         grid_start = (-north_offset, -east_offset)
         # TODO: convert start position to current position rather than map center
-        
+        grid_start = local_position
+        print(grid_start)
         # Set goal as some arbitrary position on the grid
         grid_goal = (-north_offset + 10, -east_offset + 10)
         # TODO: adapt to set goal as latitude / longitude position and convert
 
         # Run A* to find a path from start to goal
         # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
+
         # or move to a different search space such as a graph (not done here)
         print('Local Start and Goal: ', grid_start, grid_goal)
         path, _ = a_star(grid, heuristic, grid_start, grid_goal)
@@ -156,6 +166,7 @@ class MotionPlanning(Drone):
         # Set self.waypoints
         self.waypoints = waypoints
         # TODO: send waypoints to sim (this is just for visualization of waypoints)
+
         self.send_waypoints()
 
     def start(self):
