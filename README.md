@@ -31,6 +31,8 @@ In planning_utils.py, create_grid, A* algorithm and prune_path method was given 
 In motion_planning.py, where all the steps are implemented form Arming to flying to Landing. Besides the few supportive functions
 from planning_utils for path_planning.
 
+
+
 Manual--->Arming---->TakeOff---->Waypoint---->Disarming
 
 
@@ -42,16 +44,16 @@ Manual--->Arming---->Path-Planning----->TakeOff---->Waypoint---->Disarming
 
 In plan_path method:
 
---the vehicle's route planning is implemented from current position to goal position.
---With given target_altitude and saftey_distance is set to 5.
---From the colliders.csv file we extracted the lat0 and lon0 which has been set vehicle's home position.
---Then Convert a global position (lon, lat, up) to a local position (north, east, down) relative to the home position using global_to_local function.
---After reading the obstacle map data from colliders.csv, we created grid.
---Then set some goal position from command line to route.
---Used A* algorithm with diagonal motion to optimize our route search.
---Used Collinearity technique to implement prune function that minimize Waypoints.
+--the vehicle's route planning is implemented from current position to goal position. <br/>
+--With given target_altitude and saftey_distance is set to 5. <br/>
+--From the colliders.csv file we extracted the lat0 and lon0 which has been set vehicle's home position. <br/>
+--Then Convert a global position (lon, lat, up) to a local position (north, east, down) relative to the home position using global_to_local function. <br/>
+--After reading the obstacle map data from colliders.csv, we created grid. <br/>
+--Then set some goal position from command line to route. <br/>
+--Used A* algorithm with diagonal motion to optimize our route search. <br/>
+--Used Collinearity technique to implement prune function that minimize Waypoints. <br/>
 
 A* algorithm:
 
---Used Action Enum set to a cost of sqrt(2) for diagonal motion.
---Used valid_actions function to validate the next move.
+--Used Action Enum set to a cost of sqrt(2) for diagonal motion. <br/>
+--Used valid_actions function to validate the next move. <br/>
