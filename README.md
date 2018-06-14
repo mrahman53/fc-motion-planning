@@ -14,10 +14,10 @@ If you haven't already, set up your Python environment and get all the relevant 
 
 ### Step 3: Clone this Repository
 
-git@github.com:mrahman53/fc-motion-planning.git
+git clone git@github.com:mrahman53/fc-motion-planning.git
 
 source activate fcnd
-python backyard_flyer_solution.py
+python motion_planning.py
 
 
 
