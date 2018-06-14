@@ -23,19 +23,20 @@ python backyard_flyer_solution.py
 
 ### Writeup:
 
+Code Starter:
 In backyard_flyer_solution.py and motion_planning.py provided by Udacity, there are some differences that is extra state has ben added
 which is planning state.
 
-In planning_utils.py, create_grid, A* algorithm and prune_path method was given and A* has been modified.
+In planning_utils.py, create_grid, A* algorithm and prune_path method was given and A* has been modified later.
 
 In motion_planning.py, where all the steps are implemented form Arming to flying to Landing. Besides the few supportive functions
 from planning_utils for path_planning.
 
 
-
+Phases of backyard_flyer_solution.py:
 Manual--->Arming---->TakeOff---->Waypoint---->Disarming
 
-
+Phases of motion_planning.py:
 Manual--->Arming---->Path-Planning----->TakeOff---->Waypoint---->Disarming
 
 
