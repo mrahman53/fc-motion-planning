@@ -2,6 +2,38 @@
 ![Quad Image](./misc/enroute.png)
 
 
+This project is 3D Motion Planning for flying car that is developed in local machine and connecting with simulator.
+
+## To run this project on your local machine, follow these instructions:
+### Step 1: Download the Simulator
+This is a new simulator environment!
+
+### Step 2: Set up your Python Environment
+If you haven't already, set up your Python environment and get all the relevant packages installed using Anaconda following instructions in [this repository](https://github.com/udacity/FCND-Term1-Starter-Kit)
+
+### Step 3: Clone this Repository
+```sh
+git@github.com:mrahman53/fc-motion-planning.git
+
+```sh
+source activate fcnd # if you haven't already sourced your Python environment, do so now.
+python backyard_flyer_solution.py
+```
+
+
+Writeup:
+
+In planning_utils.py create_grid, A* algorithm and prune_path method is implemented.Collinearity technique is used to prune path.
+In backyard_flyer_solution.py and motion_planning.py provided by Udacity, there are some differences that is extra state has ben added
+which is planning state.
+
+Manual--->Arming---->TakeOff---->Waypoint---->Disarming
+
+
+Manual--->Arming---->Path-Planning----->TakeOff---->Waypoint---->Disarming
+
+
+
 
 This project is a continuation of the Backyard Flyer project where you executed a simple square shaped flight path. In this project you will integrate the techniques that you have learned throughout the last several lessons to plan a path through an urban environment. Check out the [project rubric](https://review.udacity.com/#!/rubrics/1534/view) for more detail on what constitutes a passing submission.
 

@@ -1,7 +1,7 @@
 from enum import Enum
 from queue import PriorityQueue
 import numpy as np
-
+from math import sqrt
 
 def create_grid(data, drone_altitude, safety_distance):
     """
@@ -55,10 +55,10 @@ class Action(Enum):
     EAST = (0, 1, 1)
     NORTH = (-1, 0, 1)
     SOUTH = (1, 0, 1)
-    UP_LEFT = (-1, -1, 1.4)
-    UP_RIGHT = (-1, 1, 1.4)
-    DOWN_LEFT = (1, -1, 1.4)
-    DOWN_RIGHT = (1, 1, 1.4)
+    UP_LEFT = (-1, -1,  sqrt(2))
+    UP_RIGHT = (-1, 1,  sqrt(2))
+    DOWN_LEFT = (1, -1, sqrt(2))
+    DOWN_RIGHT = (1, 1, sqrt(2))
 
 
     @property

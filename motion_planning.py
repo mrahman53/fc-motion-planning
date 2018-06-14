@@ -25,7 +25,7 @@ class States(Enum):
 
 class MotionPlanning(Drone):
 
-    def __init__(self, connection):
+    def __init__(self, connection, goal_global_position=None):
         super().__init__(connection)
 
         self.target_position = np.array([0.0, 0.0, 0.0])
@@ -35,7 +35,7 @@ class MotionPlanning(Drone):
 
         # initial state
         self.flight_state = States.MANUAL
-
+        self.goal_global_position = goal_global_position
         # register all your callbacks here
         self.register_callback(MsgID.LOCAL_POSITION, self.local_position_callback)
         self.register_callback(MsgID.LOCAL_VELOCITY, self.velocity_callback)
@@ -134,7 +134,7 @@ class MotionPlanning(Drone):
         global_position = self.global_position
         global_home = self.global_home
         # TODO: convert to current local position using global_to_local()
-        east,north,down = global_to_local(global_position, self.global_home)
+        north,east,down = global_to_local(global_position, self.global_home)
 
         print('global home {0}, position {1}, local position {2}'.format(self.global_home, self.global_position,
                                                                          self.local_position))
@@ -145,15 +145,14 @@ class MotionPlanning(Drone):
         grid, north_offset, east_offset = create_grid(data, TARGET_ALTITUDE, SAFETY_DISTANCE)
         print("North offset = {0}, east offset = {1}".format(north_offset, east_offset))
         # Define starting point on the grid (this is just grid center)
-        grid_start = (-north_offset, -east_offset)
+        grid_start_north = int(np.ceil(north - north_offset))
+        grid_start_east = int(np.ceil(east - east_offset))
+        grid_start = (grid_start_north, grid_start_east)
         # TODO: convert start position to current position rather than map center
-        N = int(north-north_offset)
-        E = int(east-east_offset)
-        grid_start = (N, E)
         # Set goal as some arbitrary position on the grid
-        grid_goal = (-north_offset + 80, -east_offset + 80)
+        goal_north, goal_east, goal_alt = global_to_local(self.goal_global_position, self.global_home)
+        grid_goal = (int(np.ceil(goal_north - north_offset)), int(np.ceil(goal_east - east_offset)))
         # TODO: adapt to set goal as latitude / longitude position and convert
-        #grid_goal = parser.add_argument(int)(lat0,lon0);
         # Run A* to find a path from start to goal
         # TODO: add diagonal motions with a cost of sqrt(2) to your A* implementation
         # or move to a different search space such as a graph (not done here)
@@ -187,10 +186,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=5760, help='Port number')
     parser.add_argument('--host', type=str, default='127.0.0.1', help="host address, i.e. '127.0.0.1'")
+    parser.add_argument('--goal_lon', type=str, help="Goal longitude")
+    parser.add_argument('--goal_lat', type=str, help="Goal latitude")
+    parser.add_argument('--goal_alt', type=str, help="Goal altitude")
     args = parser.parse_args()
 
     conn = MavlinkConnection('tcp:{0}:{1}'.format(args.host, args.port), timeout=60)
-    drone = MotionPlanning(conn)
+    goal_global_position = np.fromstring(f'{args.goal_lon},{args.goal_lat},{args.goal_alt}', dtype='Float64', sep=',')
+    drone = MotionPlanning(conn, goal_global_position = goal_global_position)
     time.sleep(1)
 
     drone.start()
