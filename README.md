@@ -12,13 +12,12 @@ This is a new simulator environment!
 If you haven't already, set up your Python environment and get all the relevant packages installed using Anaconda following instructions in [this repository](https://github.com/udacity/FCND-Term1-Starter-Kit)
 
 ### Step 3: Clone this Repository
-```sh
+
 git@github.com:mrahman53/fc-motion-planning.git
 
-```sh
-source activate fcnd # if you haven't already sourced your Python environment, do so now.
+source activate fcnd
 python backyard_flyer_solution.py
-```
+
 
 
 ### Writeup:
