@@ -48,7 +48,7 @@ In plan_path method:
 --the vehicle's route planning is implemented from current position to goal position. <br/>
 --With given target_altitude and saftey_distance is set to 5. <br/>
 --From the colliders.csv file we extracted the lat0 and lon0 which has been set vehicle's home position. <br/>
---Then Convert a global position (lon, lat, up) to a local position (north, east, down) relative to the home position using global_to_local function. <br/>
+--Then Convert a global position (lon, lat, up) to a local position (north, east, down) relative to the home position using   global_to_local function. <br/>
 --After reading the obstacle map data from colliders.csv, we created grid. <br/>
 --Then set some goal position from command line to route. <br/>
 --Used A* algorithm with diagonal motion to optimize our route search. <br/>
