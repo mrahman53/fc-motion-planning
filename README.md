@@ -33,6 +33,7 @@ Manual--->Arming---->TakeOff---->Waypoint---->Disarming
 Manual--->Arming---->Path-Planning----->TakeOff---->Waypoint---->Disarming
 
 
+![state-machine](https://user-images.githubusercontent.com/1839661/41431914-6d4ab5b0-6fe2-11e8-8cc3-70fd981f0f44.png)
 
 
 This project is a continuation of the Backyard Flyer project where you executed a simple square shaped flight path. In this project you will integrate the techniques that you have learned throughout the last several lessons to plan a path through an urban environment. Check out the [project rubric](https://review.udacity.com/#!/rubrics/1534/view) for more detail on what constitutes a passing submission.
